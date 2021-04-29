@@ -1,0 +1,6 @@
+Download:
+  download_folder:
+    - ~/Desktop/face-mask/Data/mask/
+  search_key: "face with mask"
+  image_numbers: 3000
+
