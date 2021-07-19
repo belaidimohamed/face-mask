@@ -1,0 +1,7 @@
+Clean:
+  input_folder:
+    - Data/Nomask/
+  output_folder: 
+    - Data/clean_Nomask/
+  filters:
+    - {type: remove_duplicate , args: { action: 'dry' }}

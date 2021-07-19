@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import yaml
 from Download.downloader import Downloader
+from Blocks.cleaner import Cleaner
 
 class AI_pipeline():
     def __init__(self,config):
@@ -8,14 +9,18 @@ class AI_pipeline():
 
     def run(self,steps):
         for step in steps:
-            print(self._config)
-            self._downloader = Downloader(self._config[step.capitalize()])
-            self._downloader.crowl()
+            if step=="download":
+                self._downloader = Downloader(self._config[step.capitalize()])
+                self._downloader.crowl()
+            if step=="clean":
+                self._cleaner = Cleaner(self._config[step.capitalize()])
+                self._cleaner.run()
 
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument("config", help="yaml config defining the training pipleline", type=str)
-    parser.add_argument("--download", help="Run download module",action='store_false')
+    parser.add_argument("--download", help="Run download module",action='store_true')
+    parser.add_argument("--clean", help="Flag images to be cleaned into a json file . Then delete this images in the output folder",action='store_true')
     args = parser.parse_args()
 
     config_file_path = getattr(args, 'config', False)
@@ -25,9 +30,7 @@ if __name__ == '__main__':
 
 
     steps=[k for k,v in vars(args).items() if v==True] # get the --keys in arguments
-
     if not steps : # if the user is too stupid to give args we will get it for him
         steps=[k.lower() for k in config.keys()]
-
     AIP = AI_pipeline(config)
     AIP.run(steps)
