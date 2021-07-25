@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 import yaml
-from Download.downloader import Downloader
+from Download.smart_downloader import SmartDownloader
 from Blocks.cleaner import Cleaner
 
 class AI_pipeline():
@@ -10,7 +10,7 @@ class AI_pipeline():
     def run(self,steps):
         for step in steps:
             if step=="download":
-                self._downloader = Downloader(self._config[step.capitalize()])
+                self._downloader = SmartDownloader(self._config[step.capitalize()])
                 self._downloader.crowl()
             if step=="clean":
                 self._cleaner = Cleaner(self._config[step.capitalize()])

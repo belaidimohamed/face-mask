@@ -25,8 +25,8 @@ class Downloader():
         self.sub = []
         while len(self.sub) < number_of_images :
             browser.execute_script("scrollBy("+ str(value) +",+1000);")
-            value += 50
-            time.sleep(1)
+            value += 1000
+            time.sleep(2)
             print(len(self.sub))
             elem1 = browser.find_element_by_id("islmp")
             self.sub += elem1.find_elements_by_tag_name("img")

@@ -46,7 +46,7 @@ class Duplicate():
 				self.cleaned['removed'] += len(hashedPaths[1:])
 				self.cleaned['clean'].append(hashedPaths[0])
 			else :
-				self.cleaned['clean'] = hashedPaths[0]
+				self.cleaned['clean'].append(hashedPaths[0])
 		self.cleaned['rest'] = self.all - self.cleaned['removed']
 		print('{} % of images have been deleted. \nRest= {} , Removed = {}'.format( 
 			(self.cleaned['removed'] /self.all)*100,
