@@ -1,0 +1,5 @@
+To run the downloader configure the config file then execute :
+`python3 run.py Configs/download.yaml --download`
+
+To run the cleaner configure the config file then execute :
+`python3 run.py Configs/cleaner.yaml --clean`

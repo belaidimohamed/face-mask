@@ -23,7 +23,7 @@ class SmartDownloader():
         self.scroll = 0    # scrolled pixels
         self.downloaded = 0 # how many images downloaded
         #  search engines to scrap until the number of images downloaded is the same as demanded
-        self.search_engine = ['google','yahoo','bing','duckduckgo']
+        self.search_engine = ['google','yahoo','duckduckgo','bing']
         self.search_engine_index = 0 # current search engine index
 
     def crowl(self):
@@ -33,8 +33,43 @@ class SmartDownloader():
             self.crowl_Google()
         if(self.search_engine[self.search_engine_index]=='yahoo'):
             self.crowl_Yahoo()
+        # if(self.search_engine[self.search_engine_index]=='bing'):
+        #     self.crowl_Bing()
         else :
             print('Sorry we are out of search engines ! \n Try adding more different keywords')
+
+    def crowl_Bing(self):
+        self.browser.get("https://www.bing.com/")
+        search = self.browser.find_element_by_name("q")
+        search.send_keys(self.config['search_key'] , Keys.ENTER)
+        print(self.browser)
+        elem = self.browser.find_element_by_link_text("Images")
+        elem.get_attribute("href")
+        elem.click()
+
+        number_of_images = self.config['image_numbers'] - self.downloaded
+        self.sub = set()
+        self.scroll = 0
+        old_sub_len = 0
+        same_len = 0 # check if there is no more new images
+        while len(self.sub) <= number_of_images and same_len <8 :
+            self.browser.execute_script("scrollBy(0,"+ str(self.scroll) +");")
+            self.scroll += 950
+            time.sleep(1)
+            elem1 = self.browser.find_elements_by_xpath('//img[contains(@id, yui)]')
+            self.sub.update(elem1)
+            if(len(self.sub)==old_sub_len):
+                same_len +=1
+            else :
+                old_sub_len = len(self.sub)
+                same_len = 0
+            print(str(len(self.sub))+'---- ' + str(same_len))
+            try:
+                show_more = self.browser.find_elements_by_xpath("//button[contains(@class, ygbt.more-res)][@name='more-res']")
+                show_more[0].click()
+            except:
+                pass
+        self.download()
 
     def crowl_Yahoo(self):
         self.browser.get("https://search.yahoo.com/")

@@ -1,0 +1,8 @@
+Create:
+  input_data:
+    - Data/clean_mask/duplicate_clean.json
+    - Data/clean_Nomask/duplicate_clean.json
+  output_folder: 
+    - Data/trainingData/clean_mask/
+  filters:
+    - {type: remove_duplicate , args: { action: 'dry' }}
