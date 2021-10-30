@@ -3,3 +3,12 @@ To run the downloader configure the config file then execute :
 
 To run the cleaner configure the config file then execute :
 `python3 run.py Configs/cleaner.yaml --clean`
+
+To run create the training data execute :
+`python3 run.py Configs/create_data.yaml --create`
+
+To train execute :
+`python3 run.py Configs/train.yaml --train`
+
+To test the model with one image execute :
+`/bin/python3 /home/mohamed/Desktop/face-mask/Utils/test.py`
