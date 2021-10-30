@@ -3,7 +3,7 @@ import yaml
 from Download.smart_downloader import SmartDownloader
 from Blocks.cleaner import Cleaner
 from Blocks.create_training_Data import CreateData
-
+from Trainings.trainer import Trainer
 class AI_pipeline():
     def __init__(self,config):
         self._config = config
@@ -19,6 +19,10 @@ class AI_pipeline():
             if step=="create":
                 self._createData = CreateData(self._config[step.capitalize()])
                 self._createData.run()
+            if step=="train":
+                self._train = Trainer(self._config[step.capitalize()])
+                self._train.run()
+
 
 if __name__ == '__main__':
     parser = ArgumentParser()
@@ -26,6 +30,7 @@ if __name__ == '__main__':
     parser.add_argument("--download", help="Run download module",action='store_true')
     parser.add_argument("--clean", help="Flag images to be cleaned into a json file . Then delete this images in the output folder",action='store_true')
     parser.add_argument("--create", help="create a numpy dataset out of the cleaned data",action='store_true')
+    parser.add_argument("--train", help="train the model with a specific dataset",action='store_true')
     args = parser.parse_args()
 
     config_file_path = getattr(args, 'config', False)

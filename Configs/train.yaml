@@ -1,0 +1,7 @@
+Train:
+  input_data:
+    - "Data/trainingData/training_data.npy"
+  output_folder: 
+    - Models
+  filters:
+    - {type: remove_duplicate , args: { action: 'dry' }}
