@@ -14,10 +14,12 @@ class Trainer():
     else: self.device = torch.device("cpu")
 
     self.config = config
-    self.img_resolution = 50
+    self.img_resolution = 96
     self.net = Net().to(self.device)
     self.optimizer = optim.Adam(self.net.parameters(), lr=0.001)
-    self.loss_function = nn.MSELoss()
+    # self.loss_function = nn.MSELoss()
+    self.loss_function = nn.CrossEntropyLoss()
+
   
   def run(self) :
     self.splitData() # put numpy data into tensors and flaten them
@@ -54,7 +56,7 @@ class Trainer():
 
 # ------------------------------------------------- Training ----------------------------------------------------
 
-  def train(self,BATCH_SIZE=128,EPOCHS=20):
+  def train(self,BATCH_SIZE=128,EPOCHS=80):
     print('Starting training process ..')
     optimizer = optim.Adam(self.net.parameters(), lr=0.001)
 
@@ -70,8 +72,8 @@ class Trainer():
             optimizer.zero_grad()   # zero the gradient buffers
             outputs = self.net(batch_X)
 
-            loss = self.smoothingLabel(outputs, batch_y,0.12)
-            # loss = self.loss_function(outputs, batch_y)
+            # loss = self.smoothingLabel(outputs, batch_y,0.12)
+            loss = self.loss_function(outputs, batch_y)
             loss.backward()
             optimizer.step()    # Does the update
 

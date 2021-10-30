@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-img_resolution = 50
+img_resolution = 96
 
 
 class Net(nn.Module):

@@ -9,9 +9,9 @@ REBUILD_DATA = True
 class CreateData:
     def __init__(self,config):
         self.config = config 
-        self.img_size = 50
-        self.obj1 = config['input_data'][0] #with mask
-        self.obj2 = config['input_data'][1] #without
+        self.img_size = 96
+        self.obj1 = config['input_data'][0] #with mask [0,1]
+        self.obj2 = config['input_data'][1] #without [1,0]
         self.labels = {  self.obj1:1 , self.obj2:0 }
         self.training_data = []
         self.objCount1 = 0
