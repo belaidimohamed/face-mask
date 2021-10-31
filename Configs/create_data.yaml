@@ -1,7 +1,7 @@
 Create:
   input_data:
-    - Data/clean_mask/duplicate_clean.json
-    - Data/clean_Nomask/duplicate_clean.json
+    - Data/clean_mask/manuel_clean.json
+    - Data/clean_Nomask/manuel_clean.json
   output_folder: 
     - Data/trainingData/
   filters:
