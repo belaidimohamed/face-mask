@@ -19,8 +19,15 @@ class CreateData:
         self.error = 0
     def run(self):
         self.make_training_data()
+    def getMinNumber(self):
+        l = []
+        for label in self.labels :
+            f=open(label)
+            l.append(len(json.load(f)['clean']))
+        return min(l)
 
     def make_training_data(self):
+        min = self.getMinNumber()
         for label in self.labels :
                 print(label)
                 f=open(label)
@@ -28,13 +35,19 @@ class CreateData:
                 for path in tqdm(paths):
                     # try :
                     img = cv2.imread(path , cv2.IMREAD_GRAYSCALE)
+                    cv2.imshow("image", img)
+                    cv2.waitKey(10)
                     img = cv2.resize(img , (self.img_size,self.img_size))
                     # img = C.contour(img)
                     self.training_data.append([np.array(img, dtype="object"), np.eye(2)[self.labels[label]]])
                     if label == self.obj1 :
                         self.objCount1 +=1
+                        # if(self.objCount1 > min +20):
+                        #     break
                     elif label == self.obj2 :
                         self.objCount2 += 1
+                        # if(self.objCount2 > min +20):
+                        #     break
                     # except Exception as e:
                     #     self.error+=1
                     #     pass

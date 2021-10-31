@@ -16,7 +16,7 @@ img_resolution = 96
 
 device = torch.device('cpu')
 model = Net()
-model.load_state_dict(torch.load(r"Models/0.636#faceVsmask", map_location=device))
+model.load_state_dict(torch.load(r"Models/0.644#faceVsmask", map_location=device))
 
 def testPhotos():
   # path = input("feed me the full path of the image to test :) : ")
@@ -95,4 +95,5 @@ def testFeed():
   vid.release()
   cv2.destroyAllWindows()
 
+# testPhotos()
 testFeed()

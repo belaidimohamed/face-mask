@@ -56,7 +56,7 @@ class Trainer():
 
 # ------------------------------------------------- Training ----------------------------------------------------
 
-  def train(self,BATCH_SIZE=128,EPOCHS=80):
+  def train(self,BATCH_SIZE=128,EPOCHS=40):
     print('Starting training process ..')
     optimizer = optim.Adam(self.net.parameters(), lr=0.001)
 
@@ -72,8 +72,8 @@ class Trainer():
             optimizer.zero_grad()   # zero the gradient buffers
             outputs = self.net(batch_X)
 
-            loss = self.smoothingLabel(outputs, batch_y,0.12)
-            # loss = self.loss_function(outputs, batch_y)
+            # loss = self.smoothingLabel(outputs, batch_y,0.12)
+            loss = self.loss_function(outputs, batch_y)
             loss.backward()
             optimizer.step()    # Does the update
 
